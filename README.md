@@ -5,6 +5,7 @@ It creates a data object from values in a URL, which can be used to perform an a
 
 # Highlights
 * An intuitive API that helps you easily work with custom deep link URLs
+* Supports extracting values from a URL's path, query string, and fragment.
 * It's all contained in just one small Swift file
 * Written in Swift 3
 * This repository includes a demo app and unit tests
