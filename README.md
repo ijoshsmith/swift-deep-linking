@@ -48,6 +48,9 @@ This struct adopts the `DeepLink` protocol, which requires it to have a `static`
 # A more complicated example
 Here's another example, from the [unit tests](/DeepLinking/DeepLinkingTests/DeepLinkingTests.swift). 
 ```swift
+// Examples:
+// my.url.scheme://display/upgrade?mustAccept=true&username=Josh
+// my.url.scheme://display/upgrade?mustAccept=false
 struct DisplayMessageDeepLink: DeepLink {
 
     static let template = DeepLinkTemplate()
@@ -69,7 +72,18 @@ struct DisplayMessageDeepLink: DeepLink {
     let username: String?
     
 }
+```
+Notice that the `DeepLinkTemplate` includes a `term` and a `string`. 
+* `term` - Represents a hard-coded string that must appear in the URL path, at the specified location, for a URL to match this deep link type. 
+* `string` - Represents a string variable that must appear in the URL path, at the specified location, for a URL to match this deep link type. The value of the string will be included in the `DeepLinkValues` object passed to the deep link's initializer.
 
+Aside from terms and strings, a URL path variable can be of type `int`, `double`, or `bool`.
+
+Similarly, a deep link can declare what query string parameters must/can appear in a matching URL. A query string parameter can be required or optional. If a required parameter is not found in a URL, then that URL cannot be used to create the template's associated deep link type. A query parameter can be of type `int`, `double`, `bool`, or `string`.
+
+# Deep link recognition
+The job of detecting which kind of deep link a URL matches is handled by `DeepLinkRecognizer`. Here is an example of how the `DisplayMessageDeepLink` from the previous section is detected and created.
+```swift
 func test_display_message_deep_link() {
     // A deep link recognizer that knows about the custom deep link type.
     let recognizer = DeepLinkRecognizer(deepLinkTypes: [DisplayMessageDeepLink.self])
@@ -88,15 +102,6 @@ func test_display_message_deep_link() {
     }
 }
 ```
-Notice that the `DeepLinkTemplate` includes a `term` and a `string`. 
-* `term` - Represents a hard-coded string that must appear in the URL path, at the specified location, for a URL to match this deep link type. 
-* `string` - Represents a string variable that must appear in the URL path, at the specified location, for a URL to match this deep link type. The value of the string will be included in the `DeepLinkValues` object passed to the deep link's initializer.
-
-Aside from terms and strings, a URL path variable of type `int`, `double`, or `bool`.
-
-Similarly, a deep link can declare what query string parameters must/can appear in a matching URL. A query string parameter can be required or optional. If a required parameter is not found in a URL, then that URL cannot be used to create a the template's associated deep link type. A query parameter can be of type `int`, `double`, `bool`, or `string`.
-
-# Deep link recognition
 When your `AppDelegate` receives a deep link URL, a `DeepLinkRecognizer` can be used to figure out which, if any, of your `DeepLink` types can handle it. This code is from the demo app's [AppDelegate](/DeepLinking/DemoApp/AppDelegate.swift):
 ```swift
 private func executeDeepLink(with url: URL) -> Bool {
