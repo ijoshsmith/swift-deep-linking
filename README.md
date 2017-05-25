@@ -13,7 +13,7 @@ It creates a data object from values in a URL, which can be used to perform an a
 Add the file [DeepLinking.swift](/DeepLinking/DeepLinking.swift) to your Xcode project.
 
 # Conceptual overview
-Your app is passed a deep link URL, inspects the URL to determine what it represents, and then performs the appropriate action for that deep link. Quite often the URL passed to your app identifies a particular piece of content to show the user. Not all URLs represent a deep link your app knows how to handle, but all deep links can be expressed as a URL. The API presented here  figures out which deep link a URL matches, and extracting data values from the URL so that your app can perform the appropriate action.
+Your app is passed a deep link URL, inspects the URL to determine what it represents, and then performs the appropriate action for that deep link. Not all URLs represent a deep link your app knows how to handle, but all deep links can be expressed as a URL. The API presented here  figures out which deep link a URL matches, and extracts data values from the URL so that your app can perform the appropriate action.
 
 # Simple example
 Suppose that the URL `my.url.scheme://show/photo?name=cat` can be interpreted by your app as a command to `show` the `photo` in an image file whose `name` is `cat`. 
