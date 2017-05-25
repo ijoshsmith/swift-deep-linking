@@ -13,7 +13,13 @@ It creates a data object from values in a URL, which can be used to perform an a
 Add the file [DeepLinking.swift](/DeepLinking/DeepLinking.swift) to your Xcode project.
 
 # Conceptual overview
-Think of a _deep link_ as an object that represents a command your app can perform. A deep link can be sent to your app in the form of a URL, which is a standardized and convenient way to combine several pieces of information. Your app gets a URL, tries to determine which deep link (i.e. command) it represents, and then performs the appropriate action. Quite often the URL passed to your app identifies a particular piece of content to show the user.
+A URL contains information about a command. 
+
+Think of a _deep link_ as a command your app can perform. 
+
+A deep link can be sent to your app in the form of a URL.
+
+Your app gets a URL, tries to determine which deep link it represents, and then performs the appropriate action. Quite often the URL passed to your app identifies a particular piece of content to show the user.
 
 # Simple example
 Suppose that the URL `my.url.scheme://show/photo?name=cat` can be interpreted by your app as a command to `show` the `photo` in an image file whose `name` is `cat`. 
