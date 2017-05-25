@@ -13,13 +13,7 @@ It creates a data object from values in a URL, which can be used to perform an a
 Add the file [DeepLinking.swift](/DeepLinking/DeepLinking.swift) to your Xcode project.
 
 # Conceptual overview
-A URL contains information about a command. 
-
-Think of a _deep link_ as a command your app can perform. 
-
-A deep link can be sent to your app in the form of a URL.
-
-Your app gets a URL, tries to determine which deep link it represents, and then performs the appropriate action. Quite often the URL passed to your app identifies a particular piece of content to show the user.
+Your app is passed a deep link URL, inspects the URL to determine what it represents, and then performs the appropriate action for that deep link. Quite often the URL passed to your app identifies a particular piece of content to show the user. Not all URLs represent a deep link your app knows how to handle, but all deep links can be expressed as a URL. The API presented here  figures out which deep link a URL matches, and extracting data values from the URL so that your app can perform the appropriate action.
 
 # Simple example
 Suppose that the URL `my.url.scheme://show/photo?name=cat` can be interpreted by your app as a command to `show` the `photo` in an image file whose `name` is `cat`. 
@@ -102,7 +96,7 @@ Aside from terms and strings, a URL path variable of type `int`, `double`, or `b
 
 Similarly, a deep link can declare what query string parameters must/can appear in a matching URL. A query string parameter can be required or optional. If a required parameter is not found in a URL, then that URL cannot be used to create a the template's associated deep link type. A query parameter can be of type `int`, `double`, `bool`, or `string`.
 
-# Deep Link Recognition
+# Deep link recognition
 When your `AppDelegate` receives a deep link URL, a `DeepLinkRecognizer` can be used to figure out which, if any, of your `DeepLink` types can handle it. This code is from the demo app's [AppDelegate](/DeepLinking/DemoApp/AppDelegate.swift):
 ```swift
 private func executeDeepLink(with url: URL) -> Bool {
