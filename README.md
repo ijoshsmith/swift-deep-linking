@@ -82,7 +82,7 @@ Aside from terms and strings, a URL path variable can be of type `int`, `double`
 Similarly, a deep link can declare what query string parameters must/can appear in a matching URL. A query string parameter can be required or optional. If a required parameter is not found in a URL, then that URL cannot be used to create the template's associated deep link type. A query parameter can be of type `int`, `double`, `bool`, or `string`.
 
 # Deep link recognition
-The job of detecting which kind of deep link a URL matches is handled by `DeepLinkRecognizer`. Here is an example of how the `DisplayMessageDeepLink` from the previous section is detected and created.
+The job of detecting which kind of deep link a URL matches is handled by `DeepLinkRecognizer`. Here is how  `DisplayMessageDeepLink` from the previous section can be detected and created.
 ```swift
 func test_display_message_deep_link() {
     // A deep link recognizer that knows about the custom deep link type.
