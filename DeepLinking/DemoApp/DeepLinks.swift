@@ -24,7 +24,7 @@ struct SelectTabDeepLink: DeepLink {
 
 
 /// Represents presenting an image to the user.
-/// Example - demoapp://show/image?name=cat
+/// Example - demoapp://show/photo?name=cat
 struct ShowPhotoDeepLink: DeepLink {
     static let template = DeepLinkTemplate()
         .term("show")
