@@ -22,7 +22,7 @@ Using the Deep Linking API in this repository, here's how to declare that your a
 
 ```swift
 /// Represents presenting an image to the user.
-/// Example - demoapp://show/image?name=cat
+/// Example - my.url.scheme://show/image?name=cat
 struct ShowPhotoDeepLink: DeepLink {
 
     static let template = DeepLinkTemplate()
