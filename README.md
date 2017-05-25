@@ -102,7 +102,7 @@ func test_display_message_deep_link() {
     }
 }
 ```
-When your `AppDelegate` receives a deep link URL, a `DeepLinkRecognizer` can be used to figure out which, if any, of your `DeepLink` types can handle it. This code is from the demo app's [AppDelegate](/DeepLinking/DemoApp/AppDelegate.swift):
+When your `AppDelegate` receives a deep link URL, a `DeepLinkRecognizer` can be used to create the appropriate `DeepLink` object, if any of your `DeepLink` types can handle that URL. This code is from the demo app's [AppDelegate](/DeepLinking/DemoApp/AppDelegate.swift):
 ```swift
 private func executeDeepLink(with url: URL) -> Bool {
     // Create a recognizer with this app's custom deep link types.
