@@ -128,7 +128,7 @@ public struct DeepLinkRecognizer {
     /// Returns a new `DeepLink` object whose template matches the specified URL, if possible.
     public func deepLink(matching url: URL) -> DeepLink? {
         for deepLinkType in deepLinkTypes {
-            if let values = extractValues(in: deepLinkType.template, from: url) {
+            if let values = DeepLinkRecognizer.extractValues(in: deepLinkType.template, from: url) {
                 return deepLinkType.init(values: values)
             }
         }
@@ -136,13 +136,13 @@ public struct DeepLinkRecognizer {
     }
     
     // MARK: - URL value extraction
-    private func extractValues(in template: DeepLinkTemplate, from url: URL) -> DeepLinkValues? {
+    private static func extractValues(in template: DeepLinkTemplate, from url: URL) -> DeepLinkValues? {
         guard let pathValues = extractPathValues(in: template, from: url) else { return nil }
         guard let queryValues = extractQueryValues(in: template, from: url) else { return nil }
         return DeepLinkValues(path: pathValues, query: queryValues, fragment: url.fragment)
     }
     
-    private func extractPathValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
+    private static func extractPathValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
         let allComponents = url.host.map { [$0] + url.pathComponents } ?? url.pathComponents
         let components = allComponents
             .filter { $0 != "/" }
@@ -173,7 +173,7 @@ public struct DeepLinkRecognizer {
         return values
     }
     
-    private func extractQueryValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
+    private static func extractQueryValues(in template: DeepLinkTemplate, from url: URL) -> [String: Any]? {
         if template.parameters.isEmpty {
             return url.query == nil ? [:] : nil
         }
@@ -185,16 +185,16 @@ public struct DeepLinkRecognizer {
             return requiredParameters.isEmpty ? [:] : nil
         }
         
-        let queryMap = DeepLinkRecognizer.createMap(of: query)
+        let queryMap = createMap(of: query)
         var values = [String: Any]()
         
         for parameter in requiredParameters {
-            guard let value = DeepLinkRecognizer.value(of: parameter, in: queryMap) else { return nil }
+            guard let value = value(of: parameter, in: queryMap) else { return nil }
             values[parameter.name] = value
         }
         
         for parameter in optionalParameters {
-            if let value = DeepLinkRecognizer.value(of: parameter, in: queryMap) {
+            if let value = value(of: parameter, in: queryMap) {
                 values[parameter.name] = value
             }
         }
