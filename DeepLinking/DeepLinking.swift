@@ -236,6 +236,10 @@ extension DeepLinkTemplate.QueryStringParameter: Hashable, Equatable {
         return name.hashValue
     }
     
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(hashValue)
+    }
+    
     public static func ==(lhs: DeepLinkTemplate.QueryStringParameter, rhs: DeepLinkTemplate.QueryStringParameter) -> Bool {
         return lhs.name == rhs.name
     }
